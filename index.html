@@ -1,0 +1,308 @@
+<html>
+    <head>
+        <title> Freddy Fasbear's Pizza </title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css">
+        <style>
+            .smooth-scroll {
+                scroll-behavior: smooth;
+            }
+            
+            .notification {
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%) translateY(-100%);
+                padding: 15px 25px;
+                background-color: #f44336;
+                color: white;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                transition: transform 0.3s ease-in-out;
+                z-index: 1000;
+                text-align: center;
+            }
+            
+            .notification.show {
+                transform: translateX(-50%) translateY(0);
+            }
+            
+            .hidden {
+                display: none;
+            }
+            
+            .success-message {
+                text-align: center;
+                padding: 20px;
+                background-color: #f8f9fa;
+                border-radius: 5px;
+                margin-top: 20px;
+            }
+            
+            .order-btn {
+                background-color: #f44336;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 10px;
+                transition: background-color 0.3s;
+            }
+            
+            .order-btn:hover {
+                background-color: #d32f2f;
+            }
+            
+            .close-btn {
+                background-color: white;
+                color: #f44336;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-top: 10px;
+                font-weight: bold;
+            }
+            
+            .birthday-modal {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: white;
+                padding: 20px;
+                border-radius: 5px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                z-index: 1001;
+                text-align: center;
+            }
+            
+            .birthday-btn {
+                padding: 8px 16px;
+                margin: 5px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            
+            .yes-btn {
+                background-color: #337f36;
+                color: white;
+            }
+            
+            .no-btn {
+                background-color: #8f2d26;
+                color: white;
+            }
+        </style>
+    </head>
+    <body class="smooth-scroll">
+    <header>
+        <img class='logo'
+            src='https://th.bing.com/th/id/OIP.I3D8adpXPN3w14zUP7emAAHaHC?rs=1&pid=ImgDetMain&cb=idpwebpc2'
+            alt='Тут має бути картинка'>
+        <div class='menu'>
+            <a class='menu-elements' href='#pizzas'>Меню</a>
+            <a class='menu-elements' href='#solutions'>Рішення</a>
+            <a class='menu-elements' href='#about'>Про нас</a>
+            <a class='menu-elements' href='#contact'>Підтримка</a>
+        </div>
+    </header>
+    <main>
+        <div class='container'>
+            <div class='block'>
+                <h1 class='main-text'>Нова система піцерій тут. Виступ аніматроніків щогодини!</h1>
+                <button class='button' id="explore-btn">Дослідити</button>
+            </div>
+        </div>
+        <h2 class='text' id="pizzas"> -30% для іменинників! </h2>
+        <div class='container-cards'>
+            <div class='card'>
+                <img class='card-img' src='https://th.bing.com/th/id/OIP.3rldQzB75CEecxLPOkyL9QHaHa?w=600&h=600&rs=1&pid=ImgDetMain&cb=idpwebpc2' alt='Тут має бути картинка'>
+                <p class='text-card'>Капричоза</p>
+                <p class='old-price'>$ 20.00 USD</p>
+                <p class='new-price'>$ 14.00 USD</p>
+                <button class='order-btn' onclick="askBirthday('Капричоза', 20, 14)">Замовити</button>
+            </div>
+            <div class='card'>
+                <img class='card-img' src='https://img.freepik.com/premium-photo/photo-pizza-table_765864-455.jpg' alt='Тут має бути картинка'>
+                <p class='text-card'>Піца "Ніжна курка"</p>
+                <p class='old-price'>$ 15.00 USD</p>
+                <p class='new-price'>$ 10.5 USD</p>
+                <button class='order-btn' onclick="askBirthday('Ніжна курка', 15, 10.5)">Замовити</button>
+            </div>
+            <div class='card'>
+                <img class='card-img' src='https://th.bing.com/th/id/OIP.KaVuE-hJ1lScx973_wGFpQHaHa?rs=1&pid=ImgDetMain&cb=idpwebpc2' alt='Тут має бути картинка'>
+                <p class='text-card'>Пепероні</p>
+                <p class='old-price'>$ 24.00 USD</p>
+                <p class='new-price'>$ 7.2 USD</p>
+                <button class='order-btn' onclick="askBirthday('Пепероні', 24, 7.2)">Замовити</button>
+            </div>
+            <div class='card'>
+                <img class='card-img' src='https://th.bing.com/th/id/OIP.H2CutQ5mi74CROgWFoWGRgHaE8?rs=1&pid=ImgDetMain&cb=idpwebpc2' alt='Тут має бути картинка'>
+                <p class='text-card'>Подвійна пепероні</p>
+                <p class='old-price'>$ 30.00 USD</p>
+                <p class='new-price'>$ 21.00 USD</p>
+                <button class='order-btn' onclick="askBirthday('Подвійна пепероні', 30, 21)">Замовити</button>
+            </div>
+        </div>
+        <div class='last-block' id="contact">
+            <h2 class='text-last-block'>Хочете влаштувати незабутнє шоу для вашої дитини та її друзів? Тоді дзвоніть нам! </h2>
+            <img class = 'img-last-block'
+            src = 'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/673a531e-9dd9-4355-b7cb-ed6d6560991e/dgg9x4v-b80ffc4f-de30-4747-9870-eec35db7fdb3.png/v1/fill/w_1280,h_720,q_80,strp/fnaf_1_stage_performance_by_bad131_dgg9x4v-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6IlwvZlwvNjczYTUzMWUtOWRkOS00MzU1LWI3Y2ItZWQ2ZDY1NjA5OTFlXC9kZ2c5eDR2LWI4MGZmYzRmLWRlMzAtNDc0Ny05ODcwLWVlYzM1ZGI3ZmRiMy5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.fnG0IwIQC3X9hFKvZLC0Rd-grGadXA8w4yV_U4DRpRQ' alt='Тут має бути картинка'>
+            <form class='elem-last-block' id="booking-form">
+                <div class='content-input'>
+                    <input class='type-phone' type='tel' placeholder='Ваш номер телефону' id="phone" required>
+                    <input class='subm' type='submit' value='Подзвоніть нам'>
+                </div>
+            </form>
+            <div id="success-message" class="success-message hidden">
+                <h3>Дякуємо за ваше замовлення!</h3>
+                <p>Ми зв'яжемося з вами найближчим часом.</p>
+            </div>
+        </div>
+        
+        <!-- Спливаюче повідомлення -->
+        <div id="notification" class="notification hidden">
+            <div id="notification-content"></div>
+            <button class="close-btn" onclick="closeNotification()">OK</button>
+        </div>
+        
+        <!-- вікно для дня народження -->
+        <div id="birthday-modal" class="birthday-modal hidden">
+            <h3>Ви іменинник сьогодні?</h3>
+            <button class="birthday-btn yes-btn" onclick="handleBirthdayResponse(true)">Так</button>
+            <button class="birthday-btn no-btn" onclick="handleBirthdayResponse(false)">Ні</button>
+        </div>
+    </main>
+    <footer>
+            <img class = 'logo-footer' src='https://th.bing.com/th/id/OIP.I3D8adpXPN3w14zUP7emAAHaHC?rs=1&pid=ImgDetMain&cb=idpwebpc2' alt='Тут має бути картинка'>
+            <div class='footer-menu'>
+            <ul class='vert-menu'>
+                <li><a class='footer-elements-first' href=''>Компанія</a></li>
+                <li><a class='footer-elements' href='#about'>Про нас</a></li>
+                <li><a class='footer-elements' href='#solutions'>Рішення проблем</a></li>
+            </ul>
+        <ul class='vert-menu'>
+                    <li><a class='footer-elements-first' href='#pizzas'>All products</a></li>
+                    <li><a class='footer-elements' href='#contact'>Номер телефону</a></li>
+                    <li><a class='footer-elements' href='#pizzas'>Піци</a></li>
+                    <li><a class='footer-elements' href='#contact'>Шоу</a></li>
+                </ul>
+            <ul class='vert-menu'>
+                <li><a class='footer-elements-first' href=''>Слідкуйте за нами!</a></li>
+                <li><a class='footer-elements' href=''>Instagram</a></li>
+                <li><a class='footer-elements' href=''>Youtube</a></li>
+            </ul>
+            </div>
+    </footer>
+    
+    <script>
+        let orders = [];
+        let currentPizza = null;
+        let currentRegularPrice = 0;
+        let currentDiscountPrice = 0;
+        
+        // Плавна прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Запитання про день народження
+        function askBirthday(pizzaName, regularPrice, discountPrice) {
+            currentPizza = pizzaName;
+            currentRegularPrice = regularPrice;
+            currentDiscountPrice = discountPrice;
+            document.getElementById('birthday-modal').classList.remove('hidden');
+        }
+        
+        // Обробка відповіді про день народження
+        function handleBirthdayResponse(isBirthday) {
+            document.getElementById('birthday-modal').classList.add('hidden');
+            orderPizza(currentPizza, isBirthday ? currentDiscountPrice : currentRegularPrice, isBirthday);
+        }
+        
+        // Спливаюче повідомлення при замовленні піци
+        function orderPizza(pizzaName, price, isBirthday) {
+            // Додаємо піцу до списку замовлень
+            const existingOrder = orders.find(order => order.name === pizzaName && order.price === price);
+            if (existingOrder) {
+                existingOrder.quantity++;
+            } else {
+                orders.push({
+                    name: pizzaName,
+                    price: price,
+                    quantity: 1,
+                    isBirthday: isBirthday
+                });
+            }
+            
+            // Формуємо текст повідомлення
+            let message = isBirthday 
+                ? `Знижка -30% як імениннику!\n`
+                : '';
+            
+            message += `Ваше замовлення:\n`;
+            orders.forEach((order, index) => {
+                message += `${index + 1}. ${order.name} - ${order.quantity} шт. x $${order.price}\n`;
+            });
+            
+            const total = orders.reduce((sum, order) => sum + (order.price * order.quantity), 0);
+            message += `\nЗагальна сума: $${total.toFixed(2)}`;
+            
+            // Показуємо повідомлення
+            const notification = document.getElementById('notification');
+            const notificationContent = document.getElementById('notification-content');
+            notificationContent.innerHTML = message.replace(/\n/g, '<br>');
+            notification.classList.remove('hidden');
+            notification.classList.add('show');
+        }
+        
+        // Закриття спливаючого повідомлення
+        function closeNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.classList.add('hidden');
+            }, 300);
+        }
+        
+        // бронювання
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const phone = document.getElementById('phone').value;
+            const successMessage = document.getElementById('success-message');
+            
+            // Приховуємо форму і показуємо повідомлення про успіх
+            this.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+            
+            // Прокручуємо до повідомлення про успіх
+            successMessage.scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+        
+        // Обробка кнопки "Дослідити"
+        document.getElementById('explore-btn').addEventListener('click', function() {
+            document.querySelector('#pizzas').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
+    </body>
+</html>
